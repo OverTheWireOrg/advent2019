@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  snowflake_adventure:
+    build:
+      context: .
+    working_dir: /home/ctf
+    container_name: snowflake_advent
+    ports:
+      - "1217:5000"

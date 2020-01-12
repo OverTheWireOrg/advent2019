@@ -1,0 +1,7 @@
+This is a 500pt crypto + rev + misc, blackbox network reversing.
+
+Playtest instructions:
+
+sudo docker-compose up
+
+then go to localhost:35000 and follow the instructions there.

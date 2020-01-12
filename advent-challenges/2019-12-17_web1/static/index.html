@@ -1,0 +1,190 @@
+<head>
+  <script src="//cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+  <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+  <style>
+    #progress-bar {
+      height: 20px;
+      border: 1px solid gray;
+      margin: 10px;
+      padding: 10px;
+      line-height: 20px;
+      text-align: center;
+      width: 800px;
+    }
+
+    .buttons {
+      margin-bottom: 10px;
+    }
+
+    /* TODO: actual progress bar */
+  </style>
+</head>
+
+<body>
+  <div id="mainGame">
+    <h2>
+      <span id="name"></span>'s adventure
+    </h2>
+    <div class="stats">
+      You have <span id="snowflakes"></span> snowflakes!
+      <span id="flag"></span>
+    </div>
+    <div class="progress">
+      <div id="progress-bar">Idle</div>
+    </div>
+    <div class="buttons">
+      <button onclick="collectSnowflake()" class="action">
+        Collect <span id="collectSpeed"></span> Snowflakes</button>
+      <button onclick="meltSnowflake()" class="action">Melt 1 Snowflake</button>
+      <button onclick="upgradeSpeed()" class="action" id="upgradeButton">
+        Spend
+        <span id="speedUpgradeCost"></span> snowflakes to upgrade collection speed</button>
+    </div>
+    <div class="buttons">
+      <button onclick="buyFlag()" class="action" id="buyFlagButton">
+        Buy a flag with 1 vigintillion (10^63) snowflakes</button>
+    </div>
+    <div class="history">
+      <!-- TODO: automatic update of history -->
+      <button onclick="updateHistory()">Show me my growth chart!</button>
+      <button onclick="restart()">Erase Progress and Restart Adventure</button>
+      <br>
+      <canvas id="graph"></canvas>
+    </div>
+  </div>
+  <div id="setup">
+    Greetings, elf! What's your name?
+    <br>
+    <br>
+    <input id="nameInput" placeholder="Enter your name...">
+    <br>
+    <br>
+    <button onclick="startGame()">Start Adventure!</button>
+  </div>
+
+  <script>
+    let currentState = {};
+    function updateState(state) {
+      currentState = state;
+      $('#name').text(state.elf_name);
+      $('#snowflakes').text(state.snowflakes);
+      $('#collectSpeed').text(state.collect_speed);
+      $('#speedUpgradeCost').text(state.speed_upgrade_cost);
+      $('button.action').removeAttr('disabled');
+      $('#upgradeButton').attr('disabled', state.speed_upgrade_cost <= state.snowflakes ? undefined : 'disabled');
+      $('#buyFlagButton').attr('disabled', 1e63 <= state.snowflakes ? undefined : 'disabled');
+      if (state.flag) {
+        $('#flag').text(state.flag);
+      }
+    }
+
+    function post(url, data, success) {
+      $.ajax({
+        type: 'POST',
+        url: url,
+        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: success
+      });
+    }
+
+    function refreshState() {
+      post('/client', { action: 'state' }, (data) => {
+        if (data.not_found) {
+          Cookies.remove('id');
+          initialize();
+        } else {
+          updateState(data);
+        }
+      });
+    }
+
+    function sleepAndRefreshState(status) {
+      $('#progress-bar').text(status);
+      $('button.action').attr('disabled', 'disabled');
+      setTimeout(() => {
+        $('#progress-bar').text('Idle');
+        refreshState();
+      }, 1000);
+    }
+
+    function collectSnowflake() {
+      post('/client', { action: 'collect', amount: currentState.collect_speed },
+        () => sleepAndRefreshState('Collecting...'));
+    }
+
+    function meltSnowflake() {
+      post('/client', { action: 'melt' }, () => sleepAndRefreshState('Melting...'));
+    }
+
+    function upgradeSpeed() {
+      post('/client', { action: 'upgrade' }, () => sleepAndRefreshState('Upgrading...'));
+    }
+
+    function buyFlag() {
+      post('/client', { action: 'buy_flag' }, () => sleepAndRefreshState('Buying flag...'));
+    }
+
+    function updateHistory() {
+      $.get('/history/client', (data) => {
+        let ctx = $('#graph')[0].getContext('2d');
+        let minTime = data[0][0];
+        let snowflakes = 0;
+        let points = [];
+        for (let i = 0; i < data.length; i++) {
+          let [time, event] = data[i];
+          let x = time - minTime;
+          if (event.action == 'collect') {
+            snowflakes += event.amount;
+          } else if (event.action == 'melt') {
+            snowflakes--;
+          }
+          points.push({ x: x / 1000, y: snowflakes });
+        }
+        new Chart(ctx, {
+          type: 'scatter',
+          data: {
+            datasets: [{
+              label: 'Snowflakes Count',
+              data: points,
+              showLine: true,
+              fill: false,
+              tension: 0,
+            }],
+          }
+        });
+      }, 'json');
+    }
+
+    function initialize() {
+      if (typeof Cookies.get('id') === 'undefined') {
+        $('#setup').show();
+        $('#mainGame').hide();
+      } else {
+        $('#setup').hide();
+        $('#mainGame').show();
+        refreshState();
+      }
+    }
+
+    function startGame() {
+      post('/control',
+        { action: 'new', name: $('#nameInput').val() },
+        (data) => {
+          Cookies.set('id', data.id);
+          $('#setup').hide();
+          $('#mainGame').show();
+          refreshState();
+        });
+    }
+
+    function restart() {
+      Cookies.remove('id');
+      initialize();
+    }
+
+    initialize();
+  </script>
+</body>

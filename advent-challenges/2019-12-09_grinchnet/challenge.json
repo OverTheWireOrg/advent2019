@@ -1,0 +1,14 @@
+{
+	"name": "GrinchNet",
+	"date": "2019-12-09",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "Th3y_w1ll_n3v3r_s33_1t_c0m1ng",
+	"category": "rev",
+	"tags": ["re", "crypto"],
+	"points": 100,
+	"info": "A smart elf at NICE (the North-pole's Intelligence Community of Examiners) noticed that the lights in Santa's Christmas tree were blinking in a weird pattern and made a recording (See https://www.youtube.com/watch?v=xGRTiTubviU).  By pulling on the wires really hard, we were able to recover 2 identical micro-controllers, with ATmega328 written on them, operating the lights.  We fear that NAUGHTY (the Network of Aides/Urchins of the Grinch Hoping to Terminate Yule) is up to something, but we need your help to investigate.",
+	"author": "Steven",
+	"play_url": "",
+	"download_file": "db7ba8f4c14667f0fe53e6079cee74e474fbc9f7768b329d8a81d7821c7bffe3-grinchnet.bin"
+}

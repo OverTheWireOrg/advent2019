@@ -1,0 +1,14 @@
+{
+	"name": "Sudo Sudoku",
+	"date": "2019-12-05",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "86472953189247356794813521457639",
+	"category": "misc",
+	"tags": ["misc", "sudoku", "_rookie"],
+	"points": 100,
+	"info": "Santa's little helpers are notoriously good at solving Sudoku puzzles, so they made a special variant...",
+	"author": "Steven",
+	"play_url": "",
+	"download_file": "2a3fad4ea8987eb63b5abdea1c8bdc75d4f2e6b087388c5e33cec99136b4257a-sudosudoku.tar.xz"
+}

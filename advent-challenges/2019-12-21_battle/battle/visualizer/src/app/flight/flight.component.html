@@ -1,0 +1,10 @@
+<svg class="line" [attr.height]="line.height * displayScale + 10" [attr.width]="line.width * displayScale + 10"
+  [style.left.px]="line.left * displayScale - 5" [style.top.px]="line.top * displayScale - 5">
+  <line [attr.x1]="line.from.x * displayScale + 5" [attr.y1]="line.from.y * displayScale + 5"
+    [attr.x2]="line.to.x * displayScale + 5" [attr.y2]="line.to.y * displayScale + 5" class="line-line">
+  </line>
+</svg>
+<div class="container" [style.left.px]="position.x * displayScale" [style.top.px]="position.y * displayScale">
+  <div class="ships" [class.red]="affiliation == 0" [class.blue]="affiliation == 1" [attr.style]="rotationStyle">
+    {{flight.getShipCount()}}</div>
+</div>

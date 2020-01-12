@@ -1,0 +1,232 @@
+<html>
+  <head>
+    <title>N7110</title>
+    <style>
+      #output {
+        position: absolute;
+        top: 225px;
+        left: 80px;
+        width: 195px;
+        height: 120px;
+      }
+
+      #status {
+        position: absolute;
+        top: 345px;
+        left: 80px;
+        width: 195px;
+        height: 20px;
+      }
+    </style>
+    <script>
+      // press menu_left four times to write sms
+      // press hash twice for ABC IME
+      // press menu twice to send sms to someone
+      // enter phone number
+      // press menu once to send sms to number
+
+      function timestamp() {
+        var d = new Date();
+        d.setUTCFullYear(1999);
+        d.setUTCMonth(11);
+        d.setUTCDate(23);
+        d.setUTCHours(3);
+        return d.getTime();
+      }
+
+      var STATE_BOOT_SCREEN = 0;
+      var STATE_MESSAGE_MENU = 1;
+      var STATE_SMS_MENU = 2;
+      var STATE_COMPOSE_MENU = 3;
+      var STATE_SMS_SCREEN = 4;
+      var STATE_CONFIRM_MENU = 5;
+      var STATE_PHONE_SCREEN = 6;
+      var STATE_SEND_SCREEN = 7;
+      var STATE_COUNT = 8;
+      var STATES = ['init', 'press 3x', 'press 2x', 'press 1x', 'toggle ime',
+                    'press 1x', 'write phone number', 'delivered'];
+      var IMES = ['T9', 'Abc', 'abc'];
+      var KEY_TIMEOUT = 1000;
+
+      var currentState = 0;
+      var currentIme = 0;
+      var lastKey = '';
+      var lastKeyPress = timestamp();
+      var lastIndex = 0;
+      var cursorPos = 0;
+      var keyBuffer = '';
+      var keyLog = '';
+      var abcChars = {
+        'keypad_zero':  ' 0',
+        'keypad_one':   '.,\'?!"1-()@/:',
+        'keypad_two':   'abc2',
+        'keypad_three': 'def3',
+        'keypad_four':  'ghi4',
+        'keypad_five':  'jkl5',
+        'keypad_six':   'mno6',
+        'keypad_seven': 'pqrs7',
+        'keypad_eight': 'tuv8',
+        'keypad_nine':  'wxyz9',
+        'keypad_star':  '@/:_;+&%*[]{}'
+      };
+     var numberChars = {
+        'keypad_zero':  '0',
+        'keypad_one':   '1',
+        'keypad_two':   '2',
+        'keypad_three': '3',
+        'keypad_four':  '4',
+        'keypad_five':  '5',
+        'keypad_six':   '6',
+        'keypad_seven': '7',
+        'keypad_eight': '8',
+        'keypad_nine':  '9',
+        'keypad_star':  '*'
+     };
+      var keyPressCodes = {
+        'keypad_zero': 0,
+        'keypad_one': 1,
+        'keypad_two': 2,
+        'keypad_three': 3,
+        'keypad_four': 4,
+        'keypad_five': 5,
+        'keypad_six': 6,
+        'keypad_seven': 7,
+        'keypad_eight': 8,
+        'keypad_nine': 9,
+        'keypad_star': 10,
+        'keypad_hash': 11,
+        'menu_left': 100,
+        'menu_right': 101,
+        'menu_up': 102,
+        'menu_down': 103,
+        'call_accept': 104,
+        'call_reject': 105
+      };
+
+      function keyHandler(key) {
+        var textarea = document.getElementById('output');
+        var statusarea = document.getElementById('status');
+        var canType = function () {
+          if (currentState === STATE_SMS_SCREEN && currentIme === 2) {
+            return true;
+          } else if (currentState === STATE_PHONE_SCREEN) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+
+        function lookupKey(key) {
+          if (currentState === STATE_SMS_SCREEN) {
+            return abcChars[key];
+          } else if (currentState === STATE_PHONE_SCREEN) {
+            return numberChars[key];
+          } else {
+            return undefined;
+          }
+        }
+
+        switch (key) {
+        case 'keypad_one':
+        case 'keypad_two':
+        case 'keypad_three':
+        case 'keypad_four':
+        case 'keypad_five':
+        case 'keypad_six':
+        case 'keypad_seven':
+        case 'keypad_eight':
+        case 'keypad_nine':
+        case 'keypad_zero':
+        case 'keypad_star':
+          if (!canType()) return;
+          var chars = lookupKey(key);
+          if (key === lastKey && chars.length > 1 &&
+              (timestamp() - lastKeyPress) < KEY_TIMEOUT) {
+            lastIndex = (lastIndex + 1) % chars.length;
+            var char = chars[lastIndex];
+            var precedingText = keyBuffer.substring(0, cursorPos - 1);
+            var followingText = keyBuffer.substring(cursorPos);
+            keyBuffer = precedingText + char + followingText;
+          } else {
+            lastIndex = 0;
+            var char = chars[lastIndex];
+            var precedingText = keyBuffer.substring(0, cursorPos);
+            var followingText = keyBuffer.substring(cursorPos);
+            keyBuffer = precedingText + char + followingText;
+            cursorPos += 1;
+          }
+          textarea.textContent = keyBuffer;
+          break;
+        case 'keypad_hash':
+          if (currentState !== STATE_SMS_SCREEN) return;
+          currentIme = (currentIme + 1) % IMES.length;
+          statusarea.textContent = 'IME is now ' + IMES[currentIme];
+          break;
+        case 'menu_left':
+          if (currentState < STATE_COUNT - 1) {
+            currentState += 1;
+            statusarea.textContent = 'State: ' + STATES[currentState];
+          }
+          break;
+        case 'menu_right':
+          if (!canType()) return;
+          var precedingText = keyBuffer.substring(0, cursorPos - 1);
+          var followingText = keyBuffer.substring(cursorPos);
+          keyBuffer = precedingText + followingText;
+          textarea.textContent = keyBuffer;
+          cursorPos = Math.max(cursorPos - 1, 0);
+          break;
+        case 'menu_up':
+          if (!canType()) return;
+          cursorPos = Math.max(cursorPos - 1, 0);
+          break;
+        case 'menu_down':
+          if (!canType()) return;
+          cursorPos = Math.min(cursorPos + 1, keyBuffer.length);
+          break;
+        case 'call_accept':
+        case 'call_reject':
+        default:
+          break;
+        }
+
+        textarea.focus();
+        textarea.setSelectionRange(cursorPos, cursorPos);
+
+        lastKey = key;
+        lastKeyPress = timestamp();
+        var keyCode = keyPressCodes[key];
+        if (keyCode === undefined) {
+          keyCode = -1;
+        }
+        keyLog += '' + lastKeyPress + ',' + keyCode + '\n';
+      }
+    </script>
+  </head>
+  <body>
+    <img src="n7110.png" width="332" height="757" border="0" usemap="#map" />
+    <textarea id="output"></textarea>
+    <textarea id="status">N7110 ready</textarea>
+    <map name="map">
+      <area shape="poly" onclick="keyHandler('menu_left')" coords="78,397,85,423,112,436,133,428,126,408,98,390,99,390" href="#menu_left" />
+      <area shape="poly" onclick="keyHandler('menu_right')" coords="258,395,248,422,221,435,200,426,216,402,237,392,239,390" href="#menu_right" />
+      <area shape="poly" onclick="keyHandler('menu_up')" coords="134,416,150,404,175,402,201,416,188,436,165,443,143,436" href="#menu_up" />
+      <area shape="poly" onclick="keyHandler('menu_down')" coords="135,479,150,467,168,463,188,468,201,478,184,493,167,498,145,493" href="#menu_down" />
+      <area shape="poly" onclick="keyHandler('call_accept')" coords="59,446,83,447,101,453,119,476,103,492,75,487,60,467" href="#call_accept" />
+      <area shape="poly" onclick="keyHandler('call_reject')" coords="215,478,223,459,242,447,275,449,270,474,248,490,227,492" href="#call_reject" />
+      <area shape="rect" onclick="keyHandler('keypad_one')" coords="48,500,102,542" href="#keypad_one" />
+      <area shape="rect" onclick="keyHandler('keypad_two')" coords="132,515,199,554" href="#keypad_two" />
+      <area shape="rect" onclick="keyHandler('keypad_three')" coords="230,498,287,547" href="#keypad_three" />
+      <area shape="rect" onclick="keyHandler('keypad_four')" coords="44,552,109,596" href="#keypad_four" />
+      <area shape="rect" onclick="keyHandler('keypad_five')" coords="131,567,197,606" href="#keypad_five" />
+      <area shape="rect" onclick="keyHandler('keypad_six')" coords="222,552,289,598" href="#keypad_six" />
+      <area shape="rect" onclick="keyHandler('keypad_seven')" coords="48,606,115,652" href="#keypad_seven" />
+      <area shape="rect" onclick="keyHandler('keypad_eight')" coords="136,619,196,661" href="#keypad_eight" />
+      <area shape="rect" onclick="keyHandler('keypad_nine')" coords="217,605,285,652" href="#keypad_nine" />
+      <area shape="rect" onclick="keyHandler('keypad_star')" coords="58,661,120,700" href="#keypad_star" />
+      <area shape="rect" onclick="keyHandler('keypad_zero')" coords="131,670,199,711" href="#keypad_zero" />
+      <area shape="rect" onclick="keyHandler('keypad_hash')" coords="209,658,272,704" href="#keypad_hash" />
+      <area shape="rect" onclick="prompt('copy paste', keyLog)" coords="240,50,280,90" href="#power_button" />
+    </map>
+  </body>
+</html>

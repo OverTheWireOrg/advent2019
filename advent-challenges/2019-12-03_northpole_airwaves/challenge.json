@@ -1,0 +1,15 @@
+{
+	"name": "Northpole Airwaves",
+	"date": "2019-12-03",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "Th3_be5t_way_t0_spread_XMAS_ch33r:_s1nging_l0ud_4_*_2_hear",
+	"category": "misc",
+	"tags": ["forensics", "gnuradio"],
+	"points": 100,
+	"info": "During our latest expedition to the north pole, one of our scientists tuned her radio to 88Mhz and captured a slice of 1MHz (samplerate = 1M/s) to a GNURadio file sink.  Surprisingly, there was more than just silence. We need your help to figure out what's going on.",
+	"author": "Steven",
+	"play_url": "",
+	"download_file": "d6d0f728ac3ff4848f849b8cf222fb38a14aee870184cc22f2efe01336b2ec17-northpole-airwaves.bin",
+	"download_file_upload": false
+}

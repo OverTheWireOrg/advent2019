@@ -1,0 +1,103 @@
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+THIS HAS SPOILERS!
+
+00-7f: push value (or-ed with top bit)
+80: negate top bit
+81: logical negate
+82: bitwise and
+83: bitwise or
+84: bitwise xor
+90: reverse stack (size, ...)
+91: duplicate top of stack
+a0: define instruction (id, size, ...)
+b0: print character
+e0-ef: invoke custom instruction
+f0-ff: conditional invoke custom instruction (condition, ...)
+
+
+BEGIN Y END(sizeof(Z) reverse sizeof(Z) `payload` define
+payload sizeof(X) reverse print
+)END
+
+print:
+dup MARKER2IND xor dup negate ?printescape
+printnotescape
+
+printnotescape:
+dup MARKER1IND xor ?actualprint
+
+actualprint:
+emit
+print
+
+printescape:
+payload sizeof(X) reverse printescapechar
+
+printescapechar:
+dup MARKER1IND xor ?actualprintescapechar
+
+actualprintescapechar:
+dup 0 negatetopbit and 02 reverse
+emit
+?printescapeseq
+printescapechar
+
+printescapeseq:
+negatetopbit emit 00 emit 00 negatetopbit emit
+
+
+Y: code which emits Z
+Z: code which emits BEGIN MARKER2 END
+
+MARKER1IND = indirect way of emitting marker1
+
+
+
+escaping: 00-7f: unchanged; >=80: x-0x80 0x80
+double escape: 00-7f: unchanged; >=80: x-0x80 0x00 0x80

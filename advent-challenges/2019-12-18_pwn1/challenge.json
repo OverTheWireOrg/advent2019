@@ -1,0 +1,17 @@
+{
+	"name": "Impressive Sudoku",
+	"date": "2019-12-18",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "Th3t_is_such_aN_1mpr3ssive_Sud0ku",
+	"category": "pwn",
+	"tags": [
+		"pwn",
+		"math"
+	],
+	"points": 100,
+	"info": "First we asked you to solve a sudoku, now we want you to make one.",
+	"author": "hpmv",
+	"play_url": "nc 3.93.128.89 1218",
+	"download_file": "4964615443db994db372a3d64524510452521f09809fdb50da22e83d15fb48ca.tar.gz"
+}

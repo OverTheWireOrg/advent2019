@@ -1,0 +1,4 @@
+skeleton: skeleton.cc
+	g++ -o skeleton -O2 skeleton.cc
+test: skeleton
+	dotnet run -c Release skeleton skeleton replay_file

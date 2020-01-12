@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <h1>Mooo!</h1>
+    <form action="/" method="POST">
+        Message:
+        <input type="text" name="message" value="Mooo!"><br> 
+        Cow:
+        <select name="cow" class="select-css">
+            {% for name in cow_names %}
+            <option value="{{ name }}">{{ name }}</option>
+            {% endfor %}
+        <select><br> 
+        <input type="submit" value="say">
+    </form>
+    {% if error %}
+    <div class="error"><span>{{ error }}</span></div>
+    {% endif %}
+    {% if cow %}
+    <div><pre>{{ cow }}</pre></div>
+    {% endif %}
+
+<div class="footer">
+  <p> Powered by <a href="https://packages.ubuntu.com/bionic/cowsay">cowsay 3.03+dfsg2-4</a> </p>
+</div>
+</body>
+
+</html>

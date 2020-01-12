@@ -1,0 +1,16 @@
+﻿@namespace Web
+@inherits LayoutComponentBase
+
+<div class="sidebar">
+    <NavMenu />
+</div>
+
+<div class="main">
+    <div class="top-row px-4" style="text-align: right">
+        <div class="big-status">@(statusText)</div>
+    </div>
+
+    <div class="content px-4">
+        @Body
+    </div>
+</div>

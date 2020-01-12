@@ -1,0 +1,10 @@
+version: '2.2'
+services:
+  maze:
+    build:
+      context: .
+    working_dir: /home/ctf
+    container_name: maze
+    ports:
+      - "1225:1337"
+    entrypoint: "/usr/sbin/xinetd -dontfork"

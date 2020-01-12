@@ -1,0 +1,39 @@
+﻿@page "/upload"
+@namespace Web
+
+<h1>Upload AI Binary</h1>
+
+<p>Enter your team's secret token: <input @bind="token"/> </p>
+<p>Select file (max. 10MB): <input type="file" @ref="inputFileElement" /></p>
+<p><button @onclick="DoUpload">Upload</button> or <button @onclick="CheckCurrent">Query Existing</button></p>
+<p style="color: red">@(error)</p>
+<p style="color: darkgreen">@(message)</p>
+@if (binaries.Count > 0) {
+    <h2>Binary History</h2>
+
+    <table class="binary-history-table">
+        <tr>
+            <th>Upload Time</th>
+            <th>sha256</th>
+            <th>Download Validation Game</th>
+        </tr>
+        @foreach (var binary in binaries)
+        {
+            <tr>
+                <td>@(binary.UploadTime.ToString())</td>
+                <td>@(binary.Sha256)</td>
+                <td>
+                    @if (binary.ResultPath != "") {
+                        <a href="/results/@(binary.ResultPath)" target="_blank">
+                            @(binary.ValidationPassed ? "Success!" : "Failed") <span class="oi oi-data-transfer-download"></span>
+                        </a>
+                    } else {
+                        <span>(Awaiting validation)</span>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+
+    <p>Note: a validation game is played between the binary and itself. The validation criteria is that both teams combined capture at least 75% of all stars.</p>
+}

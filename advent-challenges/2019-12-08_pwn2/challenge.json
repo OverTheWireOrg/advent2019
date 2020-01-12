@@ -1,0 +1,18 @@
+{
+	"name": "Unmanaged",
+	"date": "2019-12-08",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "1snt_c0rrupt1nG_manAgeD_M3m0ry_easier_than_y0u_th1nk?",
+	"category": "pwn",
+	"tags": [
+		"pwn",
+		"dotnet",
+		"_hard-as-nails"
+	],
+	"points": 100,
+	"info": "I've made a Byte Buffer as a Service (BBAAS)! The service is written in C#, but to avoid performance penalties, we use unsafe code which should have comparable performance to C++!",
+	"author": "hpmv",
+	"play_url": "nc 3.93.128.89 1208",
+	"download_file": "2866025a296e5848546641124cb75f1b760959b6291661d134a14e5379c54a6e-dist.zip"
+}

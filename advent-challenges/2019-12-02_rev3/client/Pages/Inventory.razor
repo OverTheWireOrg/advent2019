@@ -1,0 +1,66 @@
+<div class="inventory">
+    <div class="inventory-title">@(Title)</div>
+    <div class="inventory-items">
+        @foreach (var (i, item, itemData) in Contents.Items.Select((value, i) => (i, value, InventoryItems.AllItems[value.Id]))) {
+            <div class="inventory-item">
+                <div class="inventory-icon">
+                    <div class="inventory-icon-icon @(itemData.Icon.CssClass)"
+                        style="background-position: @(itemData.Icon.CssBackgroundPosition)">
+                    </div>
+                </div>
+                <div class="inventory-desc">
+                    <div class="inventory-desc-name">@(itemData.Name)
+                    @if (item.Attack > 0) {
+                        <span class="attack-icon" style="display: inline-block; margin: 0; margin-left: 8px; vertical-align: middle">
+                        </span>
+                        <span class="attack-value">
+                            +@(item.Attack)
+                        </span>
+                    }
+                    </div>
+                    <div class="inventory-desc-desc">@(itemData.Description)</div>
+                </div>
+                <div class="inventory-buttons">
+                    @if (OtherInventoryId == 0 && Contents.Id == 2) {
+                        <button @onclick="async (_) => await OnMoveItem.InvokeAsync((2, i, 0))">
+                        <span class="coin-icon"
+                            style="display: inline-block; margin: 0; vertical-align: middle"></span>@(TransferCost(item, 2, true))</button>
+                    }
+                    @if (OtherInventoryId == 2 && Contents.Id == 0) {
+                        <button @onclick="async (_) => await OnMoveItem.InvokeAsync((0, i, 2))">
+                        <span class="coin-icon"
+                            style="display: inline-block; margin: 0; vertical-align: middle"></span>+@(TransferCost(item, 2, false))</button>
+                    }
+                    @if (OtherInventoryId == 1 && Contents.Id == 0) {
+                        <button @onclick="async (_) => await OnMoveItem.InvokeAsync((0, i, 1))">
+                        Store</button>
+                    }
+                    @if (OtherInventoryId == 0 && Contents.Id == 1) {
+                        <button @onclick="async (_) => await OnMoveItem.InvokeAsync((1, i, 0))">
+                        Retrieve</button>
+                    }
+                    @if (OtherInventoryId == -1 && Contents.Id == 0 && item.Attack == 0) {
+                        <button @onclick="async (_) => await OnUseItem.InvokeAsync(i)">
+                            Use
+                        </button>
+                    }
+                </div>
+            </div>
+        }
+        @if (Contents.Id != 2) {
+            @for (var i = Contents.Items.Count; i < Contents.TotalCapacity; i++) {
+                <div class="inventory-item">
+                    <div class="inventory-icon empty">
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="inventory-summary">
+    @if (Contents.Id != 2) {
+        <div class="inventory-slots">
+            @(Contents.Items.Count) / @(Contents.TotalCapacity) slots
+        </div>
+    }
+    </div>
+</div>

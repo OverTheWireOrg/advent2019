@@ -1,0 +1,7 @@
+During our latest expedition to the north pole, one of our scientists tuned her
+radio to 88Mhz and captured a slice of 1MHz (samplerate = 1M/s) to a GNURadio
+file sink.  Surprisingly, there was more than just silence. We need your help
+to figure out what's going on. 
+
+to playtest:
+scp ubuntu@34.198.170.179:~/northpole-airwaves.wav .

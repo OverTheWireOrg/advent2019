@@ -1,0 +1,115 @@
+﻿@implements IDisposable
+
+<div class="game-window">
+@if (isLoading) {
+    <div class="loading">Loading...</div>
+}
+@if (!loginSucceeded) {
+    <div class="player-stats">
+        <div class="player-level">Login</div>
+    </div>
+    <div class="login-window">
+        <input class="username" placeholder="Username" @bind="username" />
+        <input class="password" type="password" placeholder="Password" @bind="password" />
+        <button class="login" @onclick="DoLogin">Login or Register</button>
+        <div class="error-messages">@(errorMessage)</div>
+    </div>
+}
+@if (loginSucceeded) {
+    <div class="player-stats">
+        <div class="player-level">Lv. @(player.Level)</div>
+        <div class="player-exp-bar">
+            <div class="player-exp-bar-filled"
+                 style="width: @(player.Experience * 1.0 / Math.Max(1, player.ExperienceTillNextLevel) * 100)%">
+            </div>
+            <div class="player-exp-bar-text">
+                @(player.Experience) / @(player.ExperienceTillNextLevel)
+            </div>
+        </div>
+        <div class="hp-icon"></div>
+        <div class="player-hp-bar">
+            <div class="player-hp-bar-filled"
+                style="width: @(player.Hp * 1.0 / Math.Max(1, player.MaxHp) * 100)%">
+            </div>
+            <div class="player-hp-bar-text">
+                @(player.Hp) / @(player.MaxHp)
+            </div>
+        </div>
+
+        <div class="attack-icon"></div>
+        <div class="attack-amount">
+            @(player.Attack) (+@(Backpack.Items.Select((item) => item.Attack).Sum()))</div>
+        <div class="coin-icon"></div>
+        <div class="coin-amount">$@(player.Money)</div>
+        <button class="bag-button" @onclick="(_) => BackpackDialogVisible = true">
+            <div class="bag-icon"></div>
+            Bag
+        </button>
+    </div>
+    <Dialog Visible="StashDialogVisible" OnDismiss="(_) => StashDialogVisible = false">
+        <div class="inventory-panels">
+            <Inventory
+                Contents="Stash"
+                OnMoveItem="HandleMoveItem"
+                OtherInventoryId="0">
+            </Inventory>
+            <Inventory
+                Contents="Backpack"
+                OnMoveItem="HandleMoveItem"
+                OtherInventoryId="1">
+            </Inventory>
+        </div>
+    </Dialog>
+    <Dialog Visible="ShopDialogVisible" OnDismiss="(_) => ShopDialogVisible = false">
+        <div class="inventory-panels">
+            <Inventory
+                Contents="Shop"
+                OnMoveItem="HandleMoveItem"
+                OtherInventoryId="0">
+            </Inventory>
+            <Inventory
+                Contents="Backpack"
+                OnMoveItem="HandleMoveItem"
+                OtherInventoryId="2">
+            </Inventory>
+        </div>
+    </Dialog>
+    <Dialog Visible="BackpackDialogVisible" OnDismiss="(_) => BackpackDialogVisible = false">
+        <div class="inventory-panels">
+            <Inventory
+                Contents="Backpack"
+                OnUseItem="async (index) => await UseItem(index)"
+                OtherInventoryId="-1">
+            </Inventory>
+        </div>
+    </Dialog>
+    <Dialog Visible="BattleDialogVisible">
+        <div class="battle-dialog">
+            <div class="battle-title">
+                Fighting @(CurrentMonster.name) Lv. @(CurrentMonster.level)
+            </div>
+            <div class="battle-steps">
+                @foreach (var detail in BattleDetails) {
+                    <div class="battle-step">@(detail)</div>
+                }
+            </div>
+            @if (BattleDone) {
+                <button class="battle-done" @onclick="(_) => BattleDialogVisible = false">Done</button>
+            }
+        </div>
+    </Dialog>
+
+    <Town
+        Monsters="Monsters"
+        OnEnterStash="(_) => StashDialogVisible = true"
+        OnEnterShop="(_) => ShopDialogVisible = true"
+        OnMonsterEncounter="OnMonsterEncounter"
+        AllowInput="AllowInput"
+        EnableAudio="EnableAudio"></Town>
+}
+<Dialog Visible="MessageDialogVisible" OnDismiss="(_) => MessageDialogVisible = PreventDismiss">
+    <div class="battle-dialog">
+        @(MessageDialogMessage)
+    </div>
+</Dialog>
+</div>

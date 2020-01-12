@@ -1,0 +1,17 @@
+{
+	"name": "Self-Replicating Toy",
+	"date": "2019-12-15",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "G0od_job_writing_y0ur_v3ry_0wN_quin3!",
+	"category": "rev",
+	"tags": [
+		"rev",
+		"_hard-as-nails"
+	],
+	"points": 100,
+	"info": "Can you design your own self-replicating toy?",
+	"author": "hpmv",
+	"play_url": "nc 3.93.128.89 1214",
+	"download_file": "dc3f15513e6d0ca076135b4a05fa954d62938670ddd7db88168d68c00e488b87-chal.c"
+}

@@ -1,0 +1,11 @@
+<div class="container" [style.left.px]="position.getX() * displayScale" [style.top.px]="position.getY() * displayScale">
+  <div class="dot" [class.unaffiliated]="affiliation == -1" [class.unknown]="affiliation == -2"
+    [class.red]="affiliation == 0" [class.blue]="affiliation == 1"><span
+      *ngIf="affiliation >= 0">{{star.getShipCount()}}</span></div>
+</div>
+<div class="text" [style.left.px]="position.getX() * displayScale - 25"
+  [style.top.px]="position.getY() * displayScale + 12">
+  <div *ngIf="settings.showStarId">ID={{star.getId()}}</div>
+  <div *ngIf="affiliation >= 0 && settings.showCommanderId">C={{owner}}</div>
+  <div *ngIf="settings.showRichness">R={{star.getRichness()}}</div>
+</div>

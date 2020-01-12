@@ -1,0 +1,14 @@
+{
+	"name": "Santa's Signature",
+	"date": "2019-12-19",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "RSA_3dg3_c4s3s_ftw",
+	"category": "crypto",
+	"tags": ["crypto"],
+	"points": 200,
+	"info": "Can you forge Santa's signature?",
+	"author": "semchapeu",
+	"play_url": "nc 3.93.128.89 1219",
+	"download_file": "d19536be58a82ff04dab38d842aaf97885e124d9597f9bc98d0d0e75747144e2-santas_signature.tar.gz"
+}

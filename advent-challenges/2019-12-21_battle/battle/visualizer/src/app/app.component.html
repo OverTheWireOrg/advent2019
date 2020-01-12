@@ -1,0 +1,25 @@
+<input type="file" (change)="handleFileInput($event.target.files)">
+Turn {{turn}}
+<button (click)="turn = turn - 1" [disabled]="turn &lt;= 0">&lt;</button>
+<button (click)="turn = turn + 1" [disabled]="turn &gt;= numTurns - 1">&gt;</button>
+
+<mat-slider min="0" [max]="numTurns - 1" [(value)]="turn" step="1"></mat-slider>
+
+<div class="error" *ngFor="let error of record.getFailureMessageList()">
+  AI process {{error.getProcessId()}} failed: {{error.getMsg()}}
+</div>
+
+<div class="controls">
+  <div><input type="checkbox" [(ngModel)]="settings.showStarId">Show Star ID</div>
+  <div><input type="checkbox" [(ngModel)]="settings.showCommanderId">Show Commander ID</div>
+  <div><input type="checkbox" [(ngModel)]="settings.showRichness">Show Richness</div>
+</div>
+
+<div class="map" [style.width.px]="300 * displayScale" [style.height.px]="300 * displayScale">
+  <app-link *ngFor="let link of links" [link]="link" [initial]="record.getInitialConfiguration()">
+  </app-link>
+  <app-flight *ngFor="let flight of flights" [flight]="flight" [initial]="record.getInitialConfiguration()">
+  </app-flight>
+  <app-node *ngFor="let star of stars" [star]="star.star" [position]="star.position" [settings]="settings">
+  </app-node>
+</div>

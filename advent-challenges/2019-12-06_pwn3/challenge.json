@@ -1,0 +1,17 @@
+{
+	"name": "Genetic Mutation",
+	"date": "2019-12-06",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "turn1NG_an_3lf_int0_a_M0nst3r?",
+	"category": "pwn",
+	"tags": [
+		"pwn",
+		"misc"
+	],
+	"points": 100,
+	"info": "We just rescued an elf that was captured by The Grinch for his cruel genetic experiments. But we were late, the poor elf was already mutated. Could you help us restore the elf's genes?",
+	"author": "hpmv",
+	"play_url": "nc 3.93.128.89 1206",
+	"download_file": ""
+}

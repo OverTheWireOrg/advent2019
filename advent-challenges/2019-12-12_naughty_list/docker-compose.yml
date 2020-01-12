@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  webserver:
+    build: 
+      context: ./files/bin/webserver
+    container_name: 'naughty_list'
+    restart: 'always'
+    ports:
+      - "1212:80"
+    links: 
+      - mysql
+    volumes: 
+      - ./files/web:/var/www/html
+      - ./files/config/php/php.ini:/usr/local/etc/php/php.ini
+      - ./files/config/vhosts:/etc/apache2/sites-enabled
+      - ./files/logs/apache2:/var/log/apache2
+  mysql:
+    build: ./files/bin/mysql
+    container_name: 'naughty_list-mysql'
+    restart: 'always'
+    ports:
+      - "3309:3306"
+    volumes: 
+      - ./files/data/mysql:/var/lib/mysql
+      - ./files/logs/mysql:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: d4t4b4s3!
+      MYSQL_DATABASE: chall
+      MYSQL_USER: challdb
+      MYSQL_PASSWORD: b6a1fd593b92228f8e993b30d0649afa

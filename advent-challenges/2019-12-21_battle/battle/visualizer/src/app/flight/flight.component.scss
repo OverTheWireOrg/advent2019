@@ -1,0 +1,54 @@
+.container {
+    position: absolute;
+    display: flex;
+    width: 0;
+    height: 0;
+    align-items: center;
+    justify-content: center;
+
+    .ships {
+        width: 12px;
+        height: 12px;
+        border: 2px solid white;
+        font-size: 10px;
+        color: white;
+        flex-shrink: 0;
+        text-align: center;
+
+        &.red {
+            border-color: lightcoral;
+        }
+        
+        &.blue {
+            border-color: #00adff;
+        }
+
+        &::after {
+            box-sizing: content-box;
+            height: 0px;
+            width: 0px;
+            border-left: 9px solid transparent;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            content: '';
+            display: block;
+            transform: translate(14px, -13px);
+        }
+
+        &.red::after {
+            border-left-color: lightcoral;
+        }
+        &.blue::after {
+            border-left-color: #00adff;
+        }
+
+    }
+}
+
+.line {
+    position: absolute;
+
+    .line-line {
+        stroke: violet;
+    }
+}

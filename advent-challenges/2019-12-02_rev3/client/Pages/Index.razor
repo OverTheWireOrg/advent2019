@@ -1,0 +1,100 @@
+﻿@page "/"
+
+@inject FakeServerManager FakeServerManager
+
+@if (Client == null) {
+    <div class="app">
+        <div class="opening">
+            <div class="explain">
+                <p>This challenge presents you with the following scenario:</p>
+                <p><i>You're playing a game on a device that you do not have hardware access to,
+                    i.e. you cannot access the binary. The only thing you can do is to interact
+                    with the device and to intercept and manipulate network messages.
+                    </i></p>
+                <p>The challenge simulates that scenario. The server, which is running at
+                    port 12021 (TCP), is the <i>real</i> game server. The client,
+                    however, is running in an "emulator" in this browser window. Below, you will
+                    have a choice of connecting the emulator to either the real server, or a
+                    fake server that you have set up.</p>
+
+                <p>A fake server is <b>not</b> a public server you set up; rather, you create a
+                fake server connection by connecting to port 12022 (TCP).
+                When you do so, you will get a "server ID" which you then input below, and the
+                game client will connect to that same socket.</p>
+
+                <p><b>Serious advice from the challenge author</b> (this is <i>not</i> part of the challenge):</p>
+                <ul>
+                    <li>The "game client" is written using ASP.NET Blazor; that means, the game
+                        client runs on the server, which then streams HTML content to the client;
+                        therefore, it is highly unlikely you will be able to exploit the web
+                        client, so don't waste your time. <i>This is not a web challenge.</i>
+                    </li>
+                    <li>The whole game end-to-end is written with reasonable engineering practices;
+                        there is no "insane logic". Try to approach the challenge as if this were
+                        a real game you find in some app store.
+                    </li>
+                    <li>Solving the challenge does not require excessive brute force. There is a 1MB
+                      limit each way per server connection, and a 20 second cooldown period between logins,
+                      to discourage brute-forcing.
+                    </li>
+                    <li>To keep the server state clean, accounts not logged in for more than 1 hour will be
+                        automatically deleted.</li>
+                </ul>
+            </div>
+            <hr/>
+            <div style="text-align: center">
+                <p><input type="checkbox" style="margin-right: 8px" @bind="EnableAudio"/>Enable In-Game Music (not required for challenge)</p>
+                <button @onclick="ConnectToRealServer">Connect To Real Server</button>
+                <br>
+                <input @bind="ServerID" placeholder="Enter server ID" />
+                <button @onclick="ConnectToFakeServer">Connect To Fake Server</button>
+                @if (Failed) {
+                    <div>Connection Failed.</div>
+                }
+                <p class="credits">Assets from 
+                    <a href="https://shikashiassets.itch.io/shikashis-fantasy-icons-pack">shikashi</a>,
+                    <a href="https://pixel-poem.itch.io/dungeon-assetpuck">pixel-poem</a>,
+                    <a href="https://jestan.itch.io/classic-rpg">jestan</a>,
+                    <a href="https://bigbuckbunny.itch.io/dungeon-assets-pack">BigBuckBunny</a>,
+                    <a href="https://soundcloud.com/aaron-anderson-11/sets/rpg-maker-music-loops">Aaron Krogh</a>
+                </p>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Client != null) {
+    <div class="app">
+        <client.Pages.Game Socket="Client" EnableAudio="EnableAudio">
+        </client.Pages.Game>
+    </div>
+    <div style="position:absolute; left:20px; bottom:20px"><input type="checkbox" style="margin-right: 8px" @bind="EnableAudio"/>Music</div>
+}
+
+@code {
+    private TcpClient Client {get; set; }
+    private string ServerID = "";
+    private bool Failed = false;
+    private bool EnableAudio = true;
+
+    private async Task ConnectToRealServer() {
+        Failed = false;
+        TcpClient client = new TcpClient();
+        try {
+            await client.ConnectAsync(IPAddress.Loopback, 50001);
+            Client = client;
+        } catch (Exception e) {
+            Failed = true;
+        }
+    }
+    private async Task ConnectToFakeServer() {
+        Failed = false;
+        var client = FakeServerManager.LookupClientById(ServerID);
+        if (client == null) {
+            Failed = true;
+        } else {
+            Client = client;
+            FakeServerManager.ClaimClient(ServerID);
+        }
+    }
+}

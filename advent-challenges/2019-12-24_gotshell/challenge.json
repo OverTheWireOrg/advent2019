@@ -1,0 +1,14 @@
+{
+	"name": "Got shell?",
+	"date": "2019-12-24",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "d1d_y0u_g3t_4n_1n73r4c71v3_5h3ll",
+	"category": "web",
+	"tags": ["web", "linux"],
+	"points": 100,
+	"info": "Can you get a shell? NOTE: The firewall does not allow outgoing traffic & There are no additional paths on the website.",
+	"author": "semchapeu",
+	"play_url": "http://3.93.128.89:1224",
+	"download_file": ""
+}

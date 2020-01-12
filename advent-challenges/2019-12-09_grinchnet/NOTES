@@ -1,0 +1,10 @@
+pin 12 (data) and 13 (signal) are interconnected, and also connected to the LEDS
+the signal pin will pulse on and off 100ms each. During the on phase, the value of the datapin should be read.
+
+
+dumping the flash:
+avrdude -pm328p -P /dev/ttyACM0 -c avrisp -b 19200 -U flash:r:grinchnet.bin:r
+
+erasing the memory:
+avrdude -pm328p -P /dev/ttyACM0 -c avrisp -b 19200 -t
+then type erase and reinstall the bootloader: https://www.instructables.com/id/How-To-Burn-a-Bootloader-to-Clone-Arduino-Nano-30/

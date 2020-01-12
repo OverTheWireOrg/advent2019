@@ -1,0 +1,50 @@
+.container {
+    position: absolute;
+    display: flex;
+    width: 0;
+    height: 0;
+    align-items: center;
+    justify-content: center;
+
+    .dot {
+        width: 18px;
+        height: 18px;
+        border: 2px solid white;
+        background-color: black;
+        font-size: 10px;
+        border-radius: 100%;
+        color: white;
+        flex-shrink: 0;
+        text-align: center;
+        line-height: 18px;
+        font-size: 14px;
+
+        &.unknown {
+            border-color: #555555;
+            border-width: 1px;
+        }
+
+        &.unaffiliated {
+            border-color: #eeeeee;
+            border-width: 1px;
+        }
+
+        &.red {
+            border-color: lightcoral;
+        }
+        
+        &.blue {
+            border-color: #00adff;
+        }
+    }
+}
+
+.text {
+    position: absolute;
+    width: 50px;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    background-color: black;
+    opacity: 0.5;
+}

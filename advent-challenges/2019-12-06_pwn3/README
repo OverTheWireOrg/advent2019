@@ -1,0 +1,15 @@
+The goal of this challenge is to mutate up to 4 of the binary 'elf'
+so that when executed, will be able to reveal the contents of
+flag.txt to you.
+
+Playtest:
+ - `python chal.py` would be the exposed service you interact with
+ - The player has access to the `elf` binary.
+ - The player does not have access to the source code, but it really
+   does not matter for playtesting. It provides no additional
+   information, other than making the storyline less coherent for the
+   player. (The storyline so far is you're supposed to correct the
+   mutations in the lyrics, but of course, correcting those bytes
+   would not give you the flag.)
+
+TODO: Solution & hints & dockerfile.

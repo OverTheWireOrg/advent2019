@@ -1,0 +1,13 @@
+version: '3'
+services:
+  naughty_or_nice_v2:
+    build:
+      context: .
+    working_dir: /home/ctf
+    container_name: naughty_or_nice_v2
+    ports:
+      - "1207:1234"
+    expose:
+      - "1234"
+    entrypoint: /etc/chall_init.sh
+    restart: unless-stopped

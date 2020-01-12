@@ -1,0 +1,9 @@
+Note: the source code is a spoiler; if you are playtesting, please do not read the source code.
+
+Instructions:
+
+    python3 server.py
+
+and go to localhost:5000.
+
+Your goal is to get the flag via only that web interface.

@@ -1,0 +1,14 @@
+{
+	"name": "Gr8 Escape",
+	"date": "2019-12-23",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "congratul8_ur_escAp3_was_gr8_b8_m8_1_rel8_str8_n0_h8",
+	"category": "pwn",
+	"tags": ["pwn"],
+	"points": 1337,
+	"info": "https://i.imgur.com/s3Ex4C0.jpg",
+	"author": "b0bb",
+	"play_url": "nc 3.93.128.89 1223",
+	"download_file": "072c514a88a29e2a74cdc10321c5a06f5ea472eaf0a6d5d824eae6945215e550-gr8_escape.tar.gz"
+}

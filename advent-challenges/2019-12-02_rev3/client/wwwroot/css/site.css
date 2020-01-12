@@ -1,0 +1,427 @@
+@import url('bootstrap.min.css');
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: center;
+}
+
+.game-window {
+    height: 585px;
+}
+
+.credits, .credits a {
+    font-size: 12px;
+    color: gray;
+}
+
+.credits a {
+    text-decoration: underline;
+}
+
+.loading {
+    font-style: italic;
+    margin: 10px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.login-window {
+    width: 608px;
+    height: 544px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rosybrown;
+    justify-content: center;
+}
+
+.username, .password {
+    border: none;
+    background-color: #ead5d4;
+    padding: 5px 15px;
+    border-radius: 40px;
+    margin-top: 20px;
+    outline: 0;
+}
+
+.login {
+    border: none;
+    padding: 5px 15px;
+    border-radius: 40px;
+    margin-top: 20px;
+    outline: 0;
+    margin-bottom: 20px;
+    background-color: #a0716f;
+    padding: 5px 24px;
+}
+
+.opening {
+    width: 800px;
+    border: 4px solid black;
+    border-radius: 30px;
+    padding: 30px;
+}
+
+.opening button {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.main-grid-cell {
+    background-image: url("ClassicRPGTileset/ClassicRPG_Sheet.png");
+    width: 16px;
+    height: 16px;
+}
+.stash-grid-cell {
+    background-image: url("2D\ Pixel\ Dungeon\ Asset\ Pack/items\ and\ trap_animation/chest/chest_4.png");
+    width: 16px;
+    height: 16px;
+}
+.shop-grid-cell {
+    background-image: url("2D\ Pixel\ Dungeon\ Asset\ Pack/Character_animation/priests_idle/priest1/v1/priest1_v1_4.png");
+    width: 16px;
+    height: 16px;
+}
+.item-grid-cell {
+    background-image: url("shikashi/Background\ 5.png");
+    width: 32px;
+    height: 32px;
+}
+
+.inventory {
+    border-radius: 6px;
+    background-color: rosybrown;
+    padding: 20px;
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inventory-title {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 6px 6px 0 0;
+}
+.inventory-items {
+    flex: 1;
+    overflow-y: auto;
+}
+.inventory-summary {
+    text-align: right;
+    margin-bottom: -10px;
+    margin-top: 10px;
+    font-size: 14px;
+    font-style: italic;
+}
+.inventory-item {
+    border: 1px solid #382828;
+    border-radius: 6px;
+    display: flex;
+    min-height: 60px;
+    padding: 10px;
+    background-color: #3a2f2f;
+    margin-bottom: 5px;
+    align-items: center;
+}
+
+.inventory-icon {
+    margin-right: 10px;
+    width: 32px;
+    height: 32px;
+}
+
+.inventory-icon.empty {
+    background-color: #5e473e;
+    box-sizing: border-box;
+    border: 1px solid #171118;
+}
+
+.inventory-desc {
+    font-size: 12px;
+    color: white;
+    flex: 1;
+}
+.inventory-buttons {
+    font-size: 12px;
+}
+.inventory-buttons button {
+    background-color: #af9998;
+    width: 75px;
+    border: none;
+    border-radius: 12px;
+    min-height: 24px;
+}
+.inventory-buttons button:hover {
+    background-color: #cab7b6;
+}
+.inventory-desc-name {
+    font-weight: bold;
+}
+.inventory-title {
+    color: #dadada;
+    font-weight: bold;
+    margin-top: -20px;
+    padding-top: 8px;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid gray;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #3a2e2e;
+}
+
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 10;
+}
+
+.dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 11;
+}
+
+.inventory-panels {
+    display: flex;
+}
+
+.inventory-panels .inventory:first-child {
+    margin-right: 10px;
+}
+
+
+.grid-row {
+    display: flex;
+}
+
+.grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.attack-icon {
+    background-image: url("rpgItems.png");
+    background-position: -112px -64px;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
+.attack-value {
+    color: #389e38;
+}
+
+.coin-icon {
+    background-image: url("Dungeon\ assets\ pack/Others/Coin.png");
+    background-position: 0 0;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
+.hp-icon {
+    background-image: url("Dungeon\ assets\ pack/Others/HUD.png");
+    background-position: 0 0;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
+.bag-icon {
+    background-image: url("Dungeon\ assets\ pack/Others/Others.png");
+    background-position: -16px -16px;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
+.bag-button {
+    display: flex;
+    margin-left: 24px;
+    border: none;
+    background-color: #af9998;
+    height: 24px;
+    border-radius: 12px;
+    padding: 0 10px;
+    margin-top: -12px;
+    margin-bottom: -12px;
+}
+
+.bag-button:hover
+{
+    background-color: #cab7b6;
+}
+
+.player-stats {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    background-color: #541919;
+    color: #ffcece;
+    padding: 10px;
+    border-radius: 6px 6px 0 0;
+    width: 608px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.player-level {
+    font-weight: bold;
+    margin-right: 6px;
+}
+
+.player-exp-bar, .player-hp-bar {
+    height: 16px;
+    flex: 1;
+    background-color: #4a2a2a;
+    border: 1px solid gray;
+    position: relative;
+    margin-right: 24px;
+}
+
+.player-exp-bar-filled, .player-hp-bar-filled {
+    height: 14px;
+    position: absolute;
+}
+
+.player-exp-bar-filled {
+    background-color: #0030b7;
+}
+.player-hp-bar-filled {
+    background-color: #e20000;
+}
+
+.player-exp-bar-text, .player-hp-bar-text {
+    text-align: center;
+    line-height: 16px;
+    font-size: 10px;
+    position: relative;
+}
+
+.attack-amount {
+    margin-right: 24px;
+}
+
+@keyframes monster-tile-1-frames {
+    100% {background-position-x: -80px; }
+}
+
+.monster-tile-1 {
+    background-image: url("Bat_Sprite_Sheet.png");
+    background-position-y: 0;
+    animation: monster-tile-1-frames 1s steps(5) infinite;
+    width: 16px;
+    height: 16px;
+}
+
+@keyframes monster-tile-2-frames {
+    100% {background-position-x: -260px; }
+}
+
+.monster-tile-2 {
+    background-image: url("Cobra\ Sprite\ Sheet.png");
+    background-position-y: -18px;
+    background-position-x: -4px;
+    animation: monster-tile-2-frames 1.6s steps(8) infinite;
+    width: 16px;
+    height: 16px;
+}
+
+
+@keyframes monster-tile-3-frames {
+    100% {background-position-x: -231px; }
+}
+
+.monster-tile-3 {
+    background-image: url("Imp\ Sprite\ Sheet.png");
+    background-position-y: -18px;
+    background-position-x: -7px;
+    animation: monster-tile-3-frames 1.4s steps(7) infinite;
+    width: 16px;
+    height: 16px;
+}
+
+@keyframes monster-tile-4-frames {
+    100% {background-position-x: -163px; }
+}
+
+.monster-tile-4 {
+    background-image: url("Spider\ Sprite\ Sheet.png");
+    background-position-y: -18px;
+    background-position-x: -7px;
+    animation: monster-tile-4-frames 1.0s steps(5) infinite;
+    width: 16px;
+    height: 16px;
+}
+
+.battle-dialog {
+    background-color: #5a3737;
+    padding: 30px;
+    color: #ffd1d1;
+    width: 500px;
+    height: 600px;
+    border: 10px solid #4a2020;
+    border-radius: 20px;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.battle-title {
+    font-size: 18px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.battle-done {
+    margin-top: 20px;
+    border: none;
+    background-color: #af9998;
+    height: 36px;
+    border-radius: 18px;
+    padding: 0 20px;
+}
+.battle-done:hover
+{
+    background-color: #cab7b6;
+}
+
+
+.not-focused {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    z-index: 50;
+}

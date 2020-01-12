@@ -1,0 +1,16 @@
+{
+	"name": "Easter Egg 2",
+	"date": "2019-12-05",
+	"hidden": true,
+	"state": "unopened",
+	"flag": "r0t13en_3aster_3ggz",
+	"category": "misc",
+	"tags": ["fun", "_easteregg", "_rookie"],
+	"points": 10,
+	"min_points": 10,
+	"max_points": 10,
+	"info": "Easter Egg 2",
+	"author": "EasterBunny",
+	"play_url": "https://advent2019.overthewire.org",
+	"download_file": ""
+}

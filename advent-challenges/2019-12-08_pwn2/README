@@ -1,0 +1,34 @@
+This is a C# pwnable.
+
+Normally, C# is safe, but the "unsafe" keyword allows C# to arbitrarily
+manipulate memory with pointers.
+
+====== Challenge Prompt Text ======
+I've made a Byte Buffer as a Service (BBAAS)!
+The service is written in C#, but to avoid performance penalties, we use
+unsafe code which should have comparable performance to C++!
+
+The protocol is, there are three types of messages:
+    byte 0x01 | int size
+        Allocates a new byte buffer of this size
+    byte 0x02 | int index | int offset | int size
+        Returns buffers[index].substring(offset, size)
+    byte 0x03 | int index | int offset | int size | byte[size] payload
+        Writes the given payload to the given buffer at offset
+
+====== Playtesting Instructions ======
+
+    sudo docker-compose up -d
+    nc localhost 30001
+
+This challenge is *open source*. The reason is that with a reasonable C#
+decompiler like dotPeek or dnSpy, this is a trivial task. Also, the
+tooling for decompilation is less available on Linux, so it would just be
+unnecessary burden.
+
+====== Notes ======
+
+*** SPOILER ALERT ***
+
+This challenge is very open-ended. There should be many different
+solutions possible. See solve.py for one possible solution.

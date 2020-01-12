@@ -1,0 +1,5 @@
+This is a rev + math involving SSE instructions.
+
+To playtest: look at the binary 'chal' directly, and nothing else.
+
+SPOILER: See solve.py.

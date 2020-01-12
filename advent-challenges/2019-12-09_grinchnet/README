@@ -1,0 +1,9 @@
+A smart elf at NICE (the North-pole's Intelligence Community of Examiners)
+noticed that the lights in Santa's Christmas tree were blinking in a weird
+pattern and made a recording.  By pulling on the wires really hard, we were
+able to recover 2 identical micro-controllers, with ATmega328 written on them,
+operating the lights.  We fear that NAUGHTY (the Network of Aides/Urchins of
+the Grinch Hoping to Terminate Yule) is up to something, but we need your help
+to investigate.
+
+https://www.youtube.com/watch?v=xGRTiTubviU

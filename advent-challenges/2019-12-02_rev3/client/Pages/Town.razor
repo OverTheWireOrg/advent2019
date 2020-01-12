@@ -1,0 +1,30 @@
+<div style="position: relative; transform: scale(2); transform-origin: left top">
+  <Grid GridTiles="@GroundTiles"
+    Position="Position"
+    Orientation="Orientation"
+    PositionChanged="OnPositionChanged"
+    AllowInput="AllowInput"></Grid>
+
+  @if (Monsters != null) {
+    @foreach (var monster in Monsters) {
+      <div class="grid-cell @(monster.tile.CssClass)"
+        style="position: absolute; left: @(monster.y*16)px; top: @(monster.x*16)px;"></div>
+    }
+  }
+
+  @if (EnableAudio) {
+    <div class="audio">
+      @if (IsInTown) {
+        <audio autoplay loop>
+          <source src="/308_the_tea_garden.ogg" type='audio/ogg'/>
+          <source src="/308_the_tea_garden.mp3" type='audio/mpeg'/>
+        </audio>
+      } else {
+        <audio autoplay loop>
+          <source src="/292_touch_the_sky.ogg" type='audio/ogg'/>
+          <source src="/292_touch_the_sky.mp3" type='audio/mpeg'/>
+        </audio>
+      }
+    </div>
+  }
+</div>

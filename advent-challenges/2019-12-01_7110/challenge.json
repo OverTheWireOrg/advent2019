@@ -1,0 +1,14 @@
+{
+	"name": "7110",
+	"date": "2019-12-01",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "l3ts_dr1nk_s0m3_eggn0g_y0u_cr4zy_d33r",
+	"category": "misc",
+	"tags": ["keylogger", "programming", "_rookie"],
+	"points": 150,
+	"info": "Santa is stranded on the Christmas Islands and is desperately trying to reach his trusty companion via cellphone. We've bugged the device with a primitive keylogger and have been able to decode some of the SMS, but couldn't make much sense of the last one. Can you give us a hand?",
+	"author": "wasamasa",
+	"play_url": "",
+	"download_file": "f01d32e3f32957cf42f9672e78fcb415c6deac398fdacbd69531a322b08a39c8-7110.tar.gz"
+}

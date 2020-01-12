@@ -1,0 +1,16 @@
+{
+	"name": "Santaty Flag",
+	"date": "2019-11-30",
+	"hidden": true,
+	"state": "unopened",
+	"flag": "Testing123",
+	"category": "misc",
+	"tags": ["misc", "_rookie"],
+	"points": 1,
+	"min_points": 1,
+	"max_points": 1,
+	"info": "Testing 1 2 3... This flag can be found in the channel topics of Discord and IRC",
+	"author": "Steven",
+	"play_url": "Discord/IRC",
+	"download_file": ""
+}

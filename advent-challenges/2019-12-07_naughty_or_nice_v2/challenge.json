@@ -1,0 +1,17 @@
+{
+	"name": "Naughty or Nice V2",
+	"date": "2019-12-07",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "Nev3r_Ev3r_r0ll_ur_0wn_crypt0",
+	"category": "pwn",
+	"tags": [
+		"pwn",
+		"crypto"
+	],
+	"points": 1337,
+	"info": "Last year, Santa made a network service to receive instructions for Christmas wishes. Unfortunately it had some security issues, which have now been fixed. Hopefully...",
+	"author": "Retr0id",
+	"play_url": "nc 3.93.128.89 1207",
+	"download_file": "4fe49d64cc579b73f94ba74480571a1afbd4cb9a7ca17798b7fff50fb5d97713-naughty_or_nice_v2.tar.gz"
+}

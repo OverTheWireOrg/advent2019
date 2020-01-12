@@ -1,0 +1,14 @@
+{
+	"name": "Challenge Zero",
+	"date": "2019-12-01",
+	"hidden": true,
+	"state": "unopened",
+	"flag": "31oct__1s__25dec",
+	"category": "rev",
+	"tags": ["re", "crypto"],
+	"points": 150,
+	"info": "Keep warm next to our fireplace while we wait for the CTF to start...",
+	"author": "retr0id & wasamasa",
+	"play_url": "https://advent2019.overthewire.org/challenge-zero",
+	"download_file": ""
+}

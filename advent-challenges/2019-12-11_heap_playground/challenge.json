@@ -1,0 +1,14 @@
+{
+	"name": "Heap Playground",
+	"date": "2019-12-11",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "d0_y0u_kn0w_th3_l3bl4nc14n_p4r4d0X",
+	"category": "pwn",
+	"tags": ["pwn", "heap"],
+	"points": 400,
+	"info": "Just another heap challenge",
+	"author": "semchapeu",
+	"play_url": "nc 3.93.128.89 1215",
+	"download_file": "a0a20bae50c95c9b4d2062d166134a42a878ce3d226aa5af07630188b5745c15-heap_playground.tar.gz"
+}

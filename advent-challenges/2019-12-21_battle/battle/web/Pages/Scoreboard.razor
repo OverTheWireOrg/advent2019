@@ -1,0 +1,77 @@
+﻿@page "/scoreboard"
+@namespace Web
+
+<h1>Scoreboard</h1>
+
+<div>Rounds: <span class="rounds">
+@for (var i = 0; i < data.Cache.Rounds.Count; i++) {
+  var iCopy = i;
+  <div class="round-link @(data.Cache.Rounds[i].Round == currentRound.Round ? "current-round" : "")"
+       @onclick="(_) => {roundId = iCopy; currentRound = data.Cache.Rounds[iCopy]; page = 0;}">
+    @(data.Cache.Rounds[i].Round)
+  </div>
+}
+</span>
+</div>
+
+<div class="round-board">
+    <div class="team-board">
+        @foreach (var team in currentRound.Teams) {
+            <div class="team-row">
+                <div class="team-name">@(team.Name)</div>
+                <div class="team-elo">@(team.StartingElo != -1 ? team.StartingElo.ToString() : "1500")
+                 -> 
+                @(team.EndingElo != -1 ? team.EndingElo.ToString() : "?")</div>
+                <!-- TODO: elo gain -->
+            </div>
+        }
+    </div>
+    <div class="game-board">
+        @if (currentRound.Started) {
+            <div class="search">
+                Show only matches for team: <input type="text" @bind="searchText"/>
+            </div>
+            if (searchText.Length > 0) {
+                if (teamId == -1) {
+                    <div class="search-status">Team not found.</div>
+                } else {
+                    <div class="search-status">Showing only matches for team @searchText.</div>
+                }
+            }
+
+            var searchResultCount = SearchResult.Count();
+
+            <div class="pages">
+                <div>Page:&nbsp;</div>
+                @for (var i = 0; i < (searchResultCount + 100 - 1) / 100; i++) {
+                    var iCopy = i;
+                    <div class="paging-link @(i == page ? "current-page" : "")"
+                        @onclick="(_) => page = iCopy">
+                        @(i + 1)
+                    </div>
+                }
+            </div>
+
+            foreach (var game in SearchResult.Skip(page * 100).Take(100)) {
+                <div class="game-row" @key="game.Id">
+                    <div class="team-left">@(data.TeamNames[game.Teams[0]])</div>
+                    <div class="delta-left @(DeltaClass(game.EloDeltas[0]))">@(DeltaDisplay(game.EloDeltas[0]))</div>
+                    <div class="score-left @(ScoreClass(game.Scores[0]))">@(ScoreDisplay(game.Scores[0]))</div>
+                    <div class="vs">VS</div>
+                    <div class="score-right @(ScoreClass(game.Scores[1]))">@(ScoreDisplay(game.Scores[1]))</div>
+                    <div class="delta-right @(DeltaClass(game.EloDeltas[1]))">@(DeltaDisplay(game.EloDeltas[1]))</div>
+                    <div class="team-right">@(data.TeamNames[game.Teams[1]])</div>
+                    <div class="game-record-link">
+                        <a href="@(DownloadLink(game.ResultsLink))" target="_blank">
+                            <span class="oi oi-data-transfer-download"></span>
+                        </a>
+                    </div>
+                </div>
+            }
+        } else {
+            <div>
+                Tournament round @(currentRound.Round) is scheduled to begin at @(ScheduledTime).
+            </div>
+        }
+    </div>
+</div>

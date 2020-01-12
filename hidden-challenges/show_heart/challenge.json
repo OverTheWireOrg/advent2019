@@ -1,0 +1,14 @@
+{
+	"name": "Our Hearts",
+	"date": "2019-12-20",
+	"hidden": true,
+	"state": "unopened",
+	"flag": "A_light_heart_lives_long.A_big_thank_you_from_the_Advent_CTF_Team",
+	"category": "misc",
+	"tags": ["fun"],
+	"points": 150,
+	"info": "Show us your heart",
+	"author": "Steven",
+	"play_url": "https://github.com/OverTheWireOrg/advent2019-strikeapose",
+	"download_file": ""
+}

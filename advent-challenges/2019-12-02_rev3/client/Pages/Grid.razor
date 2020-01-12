@@ -1,0 +1,50 @@
+<div style="position: absolute; width: @(GridTiles[0].Length * 16)px; height: @(GridTiles.Length * 16)px; outline: none"
+     @onkeypress="OnKeyPress"
+     tabindex="0" @onfocus="(_) => Focused = true"
+     @onblur="(_) => Focused = false">
+    <div class="grid">
+        @foreach (var i in GridTiles.Select((v, i) => i)) {
+            <div class="grid-row">
+                @foreach (var j in GridTiles[i].Select((v, j) => j)) {
+                    <div class="grid-cell @(Tiles.GrassVariant[(HashCode.Combine(i.GetHashCode(), j.GetHashCode())% 8 + 8) % 8].CssClass)"
+                        style="background-position: @(Tiles.GrassVariant[(HashCode.Combine(i.GetHashCode(), j.GetHashCode())% 8 + 8) % 8].CssBackgroundPosition)">
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    <div class="grid">
+        @foreach (var row in GridTiles) {
+            <div class="grid-row">
+                @foreach (var col in row) {
+                    <div class="grid-cell @(col.CssClass)"
+                        style="background-position: @(col.CssBackgroundPosition)">
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <div class="grid-cell @(Player.CssClass)"
+        style="background-position: @(Player.CssBackgroundPosition);
+            position: absolute;
+            top: @(PlayerTop)px;
+            left: @(PlayerLeft)px">
+    </div>
+
+    @foreach (var (tile, x, y) in MonsterTiles) {
+        <div class="grid-cell @(tile.CssClass)"
+            style="background-position: @(tile.CssBackgroundPosition);
+                   position: absolute;
+                   top: @(x * 16)px;
+                   left: @(y * 16)px">
+        </div>
+    }
+    @if (!Focused) {
+        <div class="not-focused">
+            <div>
+                Click here to focus on the game, and use W, S, A, D to move.
+            </div>
+        </div>
+    }
+</div>

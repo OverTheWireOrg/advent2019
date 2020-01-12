@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package Web;
+
+message GameData {
+    int64 id = 7;
+    repeated int32 teams = 1;
+    repeated double scores = 2;
+    string results_link = 3;
+    repeated double elo_deltas = 4;
+    int64 start_time = 5;
+    int64 end_time = 6;
+}
+
+message RoundData {
+    int32 round = 1;
+    bool started = 2;
+    int64 scheduled_time = 5;
+    repeated GameData games = 3;
+    repeated TeamData teams = 4;
+}
+
+message TeamData {
+    int32 id = 1;
+    string name = 2;
+    string binary = 3;
+    int32 starting_elo = 4;
+    int32 ending_elo = 5;
+}
+
+message TournamentData {
+    repeated RoundData rounds = 1;
+    int32 current_round = 3;
+}

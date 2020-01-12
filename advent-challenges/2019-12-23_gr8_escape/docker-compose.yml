@@ -1,0 +1,10 @@
+version: '2'
+services:
+  gr8_escape:
+    build:
+      context: .
+    working_dir: /home/ctf
+    container_name: gr8_escape
+    ports:
+      - "1223:31337"
+    entrypoint: "/usr/sbin/xinetd -dontfork"

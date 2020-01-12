@@ -1,0 +1,22 @@
+#!/bin/sh
+
+argcols=${1:-80}
+argrows=${2:-25}
+
+# fallback
+selcols=80
+selrows=25
+
+for rows in `seq 50 -1 25`;
+do
+	cols=$((rows * 32 / 10))
+	if [ $rows -le $argrows -a $cols -le $argcols ];
+	then
+		selcols=$cols
+		selrows=$rows
+		break
+	fi
+done
+
+gif-for-cli -l 0 -m 256fgbg --cols $selcols --rows $selrows flag.gif
+

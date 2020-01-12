@@ -1,0 +1,24 @@
+syntax="proto3";
+
+package Framework;
+
+message TeamData {
+  int32 id = 1;
+  string binary_path = 2;
+}
+
+message GameLaunchParams {
+  repeated TeamData teams = 1;
+  bool practice = 2;
+}
+
+message GameResults {
+  repeated double points = 1;
+  string result_path = 2;
+  // Number of stars captured by each player at the end of the game.
+  repeated int32 num_stars = 3;
+  // CPU time spent per player, in milliseconds.
+  repeated int32 cpu_time = 4;
+  // Number of turns played.
+  int32 num_turns = 5;
+}

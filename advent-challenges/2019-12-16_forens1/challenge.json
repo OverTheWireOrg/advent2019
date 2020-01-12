@@ -1,0 +1,16 @@
+{
+	"name": "Musical Stegano",
+	"date": "2019-12-16",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "Mus1Cal_fUN",
+	"category": "misc",
+	"tags": [
+		"steganography"
+	],
+	"points": 100,
+	"info": "I found a CD with some relaxing music on it, but one track just sounds completely off. The name of the track is 'BASS SEVEN TRIGRAPHS IN G MAJOR'. Hint: all the information you need to solve this challenge is audible. In other words, it's possible to solve with your ears only, though not everyone would be able to do that. An .ogg file is provided along with the .mid, for reference only, but is otherwise not useful. The .mid file is what you should use for the challenge.",
+	"author": "hpmv",
+	"play_url": "",
+	"download_file": "934ad81cc0b6a947eec6a8a18e78dde3a0630f22f7ee8d7f28eee685ed410976-stegano.zip"
+}

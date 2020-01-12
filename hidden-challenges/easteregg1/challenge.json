@@ -1,0 +1,16 @@
+{
+	"name": "Easter Egg 1",
+	"date": "2019-12-01",
+	"hidden": true,
+	"state": "unopened",
+	"flag": "cl3anup_0n_1sl3_51v3",
+	"category": "misc",
+	"tags": ["fun", "_easteregg"],
+	"points": 10,
+	"min_points": 10,
+	"max_points": 10,
+	"info": "Easter Egg 1. TODO: make clean",
+	"author": "EasterBunny",
+	"play_url": "https://advent2019.overthewire.org",
+	"download_file": ""
+}

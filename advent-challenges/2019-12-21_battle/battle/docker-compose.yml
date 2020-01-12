@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - "POSTGRES_PASSWORD=Fs2Y2P2udVHZb6Xk"
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+    volumes:
+      - ./volumes/db:/var/lib/postgresql/data/
+      - ./db:/docker-entrypoint-initdb.d/
+
+  framework:
+    build:
+      context: .
+      dockerfile: framework/Dockerfile
+    links:
+      - db
+    networks:
+      - backend
+    volumes:
+      - ./volumes/binaries:/data/binaries
+      - ./volumes/results:/data/results
+
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    ports:
+      - "80:5001"
+    links:
+      - db
+    networks:
+      - backend
+    volumes:
+      - ./volumes/binaries:/data/binaries
+      - ./volumes/results:/data/results
+      - ./volumes/visualizer:/visualizer
+
+  visualizer:
+    build:
+      context: visualizer
+      dockerfile: Dockerfile
+    volumes:
+      - ./volumes/visualizer:/visualizer
+  
+networks:
+  backend:
+    driver: "bridge"
+

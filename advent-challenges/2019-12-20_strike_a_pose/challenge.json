@@ -1,0 +1,14 @@
+{
+	"name": "Strike a pose",
+	"date": "2019-12-20",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "m0r3_th4n_1_th0usand_w0rds",
+	"category": "misc",
+	"tags": ["fun"],
+	"points": 150,
+	"info": "Time to show off those ugly xmas sweaters!",
+	"author": "Steven",
+	"play_url": "https://github.com/OverTheWireOrg/advent2019-strikeapose",
+	"download_file": ""
+}

@@ -1,0 +1,16 @@
+{
+	"name": "Easter Egg 3",
+	"date": "2019-12-10",
+	"hidden": true,
+	"state": "unopened",
+	"flag": "b4rc0d3s_4_lyf3",
+	"category": "misc",
+	"tags": ["fun", "_easteregg", "_rookie"],
+	"points": 10,
+	"min_points": 10,
+	"max_points": 10,
+	"info": "Easter Egg 3",
+	"author": "EasterBunny",
+	"play_url": "https://twitter.com/OverTheWireCTF",
+	"download_file": ""
+}

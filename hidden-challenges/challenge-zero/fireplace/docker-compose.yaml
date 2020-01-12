@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  challenge-zero:
+    build:
+      context: .
+    container_name: challenge-zero
+    ports:
+      - "10000:10000"

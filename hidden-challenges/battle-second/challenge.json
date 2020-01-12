@@ -1,0 +1,16 @@
+{
+	"name": "2nd place -- Battle of the Galaxies",
+	"date": "2019-12-21",
+	"hidden": true,
+	"state": "unopened",
+	"flag": "AOTW{BATTLE_lwefho2fih498hc20h0h092h0-2}",
+	"category": "misc",
+	"tags": ["battle"],
+	"points": 300,
+        "min_points": 300,
+        "max_points": 300,
+	"info": "Battle of the galaxies, 2nd place!",
+	"author": "hpmv, b0bb, Steven, likvidera",
+	"play_url": "https://battle-advent2019.overthewire.org",
+	"download_file": ""
+}

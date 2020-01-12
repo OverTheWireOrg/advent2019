@@ -1,0 +1,17 @@
+version: '2.2'
+
+services:
+    ctf:
+        build: ./
+        ports:
+            - "12021:50001"
+            - "12022:50002"
+            - "12020:5001"
+        expose:
+            - "50001"
+            - "50002"
+            - "5001"
+        pids_limit: 1024
+        cpus: 2
+        restart: unless-stopped
+        

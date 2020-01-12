@@ -1,0 +1,16 @@
+TL;DR: Fairly basic AES stuff crammed into an MBR
+
+If you want a fully non-spoilers experience, just look at boot.bin and stop
+reading here.
+
+
+
+
+How to run:
+
+qemu-system-x86_64 -hda boot.bin -cpu max
+
+
+If you want to run it on real hardware, AES-NI must be supported!
+
+(As-is, it fails silently if AES-NI support is not present...)

@@ -1,0 +1,27 @@
+version: '3'
+services:
+  challenge:
+    build: .
+    expose:
+      - "1299"
+    restart: unless-stopped
+    logging:
+      options:
+          max-size: "1m"
+          max-file: "2"
+  chalnginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    links:
+      - challenge:challenge
+    depends_on:
+      - challenge    
+    ports:
+      - "1204:80"
+    entrypoint: /etc/entry.sh
+    logging:
+      options:
+          max-size: "1m"
+          max-file: "2"

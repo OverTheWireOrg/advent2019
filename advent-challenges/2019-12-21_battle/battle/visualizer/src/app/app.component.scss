@@ -1,0 +1,16 @@
+.map {
+    position: relative;
+    background-color: black;
+}
+
+mat-slider {
+    display: block;
+}
+
+.controls {
+    display: flex;
+
+    > div {
+        margin-right: 20px;
+    }
+}

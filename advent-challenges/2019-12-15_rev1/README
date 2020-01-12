@@ -1,0 +1,11 @@
+This is a fairly difficult rev + misc.
+
+To playtest:
+
+Run `make chal`.
+
+The resulting binary `chal` is given to the player.
+
+The source code is NOT disclosed.
+
+SPOILER: `example_solution` is an answer key that works.

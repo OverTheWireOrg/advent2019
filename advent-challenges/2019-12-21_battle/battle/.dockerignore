@@ -1,0 +1,15 @@
+example
+volumes
+framework/bin
+framework/obj
+framework/.vscode
+ops
+simulator/bin
+simulator/obj
+simulator/.vscode
+web/.vscode
+web/bin
+web/obj
+visualizer
+framework/Dockerfile
+web/Dockerfile

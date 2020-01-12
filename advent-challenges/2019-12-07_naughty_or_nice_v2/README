@@ -1,0 +1,8 @@
+This is kinda a sequel to my "naughty or nice" challenge from last year.
+It will run as a network serice (e.g. with socat, I imagine).
+It's designed to be pwned, so will need to run inside docker (TODO)
+
+
+Spoiler alert:
+
+This time the vulnerability is in the crypto itself.

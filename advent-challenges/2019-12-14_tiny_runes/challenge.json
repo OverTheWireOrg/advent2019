@@ -1,0 +1,14 @@
+{
+	"name": "tiny runes",
+	"date": "2019-12-14",
+	"hidden": false,
+	"state": "unopened",
+	"flag": "wh4t_4_r0tt3n_fi13_f0rm4t",
+	"category": "rev",
+	"tags": ["game", "reversing", "asset files"],
+	"points": 250,
+	"info": "One of Santa's Little Helpers received an unusual Christmas wish, a copy of the yet to be released Deus Hex game. All they managed to find were fragments from the dialogue system. Can you decode the last one?",
+	"author": "wasamasa",
+	"play_url": "",
+	"download_file": "d4037209017d4730edc598fe62e6b17f5573ee259b6ad7c8723bac962cf0b328-tiny-runes.tar.gz"
+}

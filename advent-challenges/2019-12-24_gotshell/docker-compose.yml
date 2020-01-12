@@ -1,0 +1,19 @@
+version: '3'
+services:
+  challenge:
+    build: .
+    ports:
+      - "1224:1224"
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETGID
+    networks:
+      - blockout
+networks:
+  blockout:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 66.66.66.0/24

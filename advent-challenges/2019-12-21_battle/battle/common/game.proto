@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package Game;
+
+// Input given at the beginning of the game.
+message InitialInput {
+    // The x and y coordinates of each star.
+    // The star ID is the index into this arrays.
+    // Star IDs are never anonymized.
+    repeated StarPosition star_positions = 1;
+}
+
+// Input given to each commander on each turn.
+// Only the data visible to the commander is given.
+// All "owner" (commander) IDs are anonymized.
+message TurnInput {
+    repeated Star stars = 1;
+    repeated Link link = 2;
+    repeated Flight flight = 3;
+}
+
+// Output expected from each commander on each turn.
+message TurnOutput {
+    // Instruction to fly some ships from one star
+    // to another.
+    repeated Fly fly = 1;
+}
+
+message StarPosition {
+    int32 x = 1;
+    int32 y = 2;
+}
+
+message Star {
+    // ID of the star.
+    int32 id = 1;
+    // Richness, from 1 to 5.
+    int32 richness = 2;
+    // Owner commander ID.
+    int32 owner = 3;
+    // Number of ships sitting on the star.
+    int32 ship_count = 4;
+    // Number of turns till the next production event
+    // where the star generates new ships. This is 0
+    // for unowned stars.
+    int32 turns_to_next_production = 5;
+}
+
+// Link between two stars.
+message Link {
+    // Always provided such that star_id_a < star_id_b.
+    int32 star_id_a = 1;
+    int32 star_id_b = 2;
+}
+
+// A group of ships in flight.
+message Flight {
+    int32 from_star_id = 1;
+    int32 to_star_id = 2;
+    int32 ship_count = 3;
+    int32 owner = 4;
+    // Number of turns till the ships arrive.
+    int32 turns_to_arrival = 5;
+}
+
+message Fly {
+    int32 from_star_id = 1;
+    int32 to_star_id = 2;
+    int32 ship_count = 3;
+}
+
+// Record of a completed game.
+// IDs here are NOT anonymized.
+message GameRecord {
+    InitialInput initial_configuration = 1;
+    // Contains one TurnInput per turn, for all (not each) commanders.
+    repeated TurnInput turns = 2;
+    // Score earned per player. From 0 to 1.
+    repeated double scores = 3;
+    // Failure message for failed AIs. Only given for practice games.
+    repeated FailureMessage failure_message = 4;
+    // Number of stars captured by each player at the end of the game.
+    repeated int32 num_stars = 5;
+    // CPU time spent per player, in milliseconds.
+    repeated int32 cpu_time = 6;
+}
+
+message FailureMessage {
+    int32 process_id = 1;
+    string msg = 2;
+}

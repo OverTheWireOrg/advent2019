@@ -1,0 +1,15 @@
+version: '2.2'
+
+services:
+    ctf:
+        build: ./
+        volumes: 
+            - ./xinetd:/etc/xinetd.d/xinetd:ro
+        ports:
+            - "1214:8888"
+        expose:
+            - "8888"
+        pids_limit: 1024
+        cpus: 1
+        restart: unless-stopped
+        
